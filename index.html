@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change background HEX color</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="all.min.css">
+    <link rel="stylesheet" href="fontawesome.min.css">
+
+    
+</head>
+
+<body>
+
+<section id="background">
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-12">
+
+              <div class="form-group">
+
+                <div id="copy-notification">Copied color code</div>
+
+                <input type="text" value="rgb(51, 170, 177)" id="new-value" class="form-control">
+
+                <i onclick="copyColor()" title="copy to clipboard" id="copy-icon" class="fa-solid fa-cop">C</i>
+
+                <button onclick="changeColor()" id="change" type="button" class="btn btn-info mt-3">Change</button>
+
+              </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+
+    
+// All selector
+
+const displayColorCode = document.getElementById("new-value");
+const bgColor = document.getElementById("background");
+const copyNotification = document.getElementById("copy-notification");
+
+
+
+// Setup RGB color on UI
+
+function changeColor(){
+    bgColor.style.backgroundColor = createColor();
+    displayColorCode.value = createColor();
+
+}
+
+
+// Generate RGB color code
+
+function createColor(){
+    
+    const red = Math.round(Math.random() * 255);
+    const green = Math.round(Math.random() * 255);
+    const blue = Math.round(Math.random() * 255);
+
+    const result = `rgb(${red}, ${green}, ${blue})`;
+    
+    return result;
+    
+}
+
+
+// Color copy handler
+
+function copyColor(){
+
+    displayColorCode.select();
+    navigator.clipboard.writeText(displayColorCode.value);
+
+    copyNotification.innerText = displayColorCode.value + " Copied !";
+    copyNotification.style.display = "block";
+
+    setTimeout(() => {
+        copyNotification.style.display = "none";
+    }, 1500);
+
+}
+
+</script>
+
+</body>
+
+</html>
